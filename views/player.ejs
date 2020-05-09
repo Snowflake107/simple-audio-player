@@ -1,0 +1,43 @@
+<%- include("./blocks/header.ejs") %>
+<br><br><br><br><br><br>
+
+<div class="container">
+    <div class="jumbotron bg-dark text-white">
+      <div class="justify-content-start">
+          <% if (playAudio) { %>
+            <audio id="player audio" controls autoplay <%= loop %>>
+                <source src="<%= buffer %>">
+            </audio>
+          <% } else { %>
+          <video id="player video" controls autoplay <%= loop %> height="50%" width="70%">
+                <source src="<%= buffer %>">
+          </video>
+          <% } %>
+        </div>
+      <div class="float-none">
+        <br>
+        <h3 class="text-responsive"><a href="<%= data.video_url %>" id="yturl" target="_blank"><%= title %></a></h3>
+        <br>
+        <h5>
+          Artist: <%= data.author.name %>
+        </h5>
+      </div>
+    </div>
+</div>
+<!--
+<script>
+    var audio = document.getElementById("player");
+    audio.onended = function () {
+        <%# if (loop !== 'loop') { %>
+        if (window.confirm('Player has ended. Do you want to go to the homepage?')) {
+            window.location = '/';
+        }
+        else {
+            die();
+        }
+        <%# } %>
+    };
+</script>
+-->
+
+<%- include("./blocks/footer.ejs") %>

@@ -1,0 +1,22 @@
+body {
+  background-color: #232323;
+  color: #FFFFFF;
+}
+
+audio {
+  width: 100%;
+}
+
+.card {
+  border: none;
+}
+
+#yturl {
+  text-decoration: none;
+  color: #7289DA;
+  font-weight: bold;
+}
+
+#yturl:hover {
+  text-decoration: underline;
+}
