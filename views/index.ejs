@@ -1,0 +1,86 @@
+<%- include("./blocks/header.ejs") %>
+<br><br><br><br>
+<div class="container">
+    <div class="jumbotron bg-dark text-white">
+      <center>
+        <img draggable="false" src="https://cdn.glitch.com/e76ae363-16c5-4fd7-a171-d3823a78d505%2F0ade0a3b-681b-40ed-a3ff-a1a5063bc79b.image.png?v=1582287697033" class="rounded img-fluid" height="200" width="200">
+        <br />
+        <h3>
+          YouTube Player
+        </h3>
+      </center>
+      <hr style="background-color: #FFFFFF;">
+      <% if(error) { %>
+      <div class="alert alert-danger" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h5>
+          Please provide valid YouTube URL/Video Name.
+        </h5>
+      </div>
+      <% } %>
+        <form method="POST" autocomplete="off">
+            <div class="form-group">
+                <label for="url">Video URL/Name</label>
+                <input type="text" name="url" class="form-control" id="url" aria-describedby="desc" required>
+                <small id="desc" class="form-text text-muted">YouTube video URL/Name</small>
+            </div>
+            <div class="form-group form-check">
+                <input name="loop" type="checkbox" class="form-check-input" id="check">
+                <label class="form-check-label" for="check">Loop</label>
+            </div>
+            <div class="form-group form-check">
+                <input name="video" type="checkbox" class="form-check-input" id="check">
+                <label class="form-check-label" for="check">Video</label>
+            </div>
+            <button type="submit" id="button" class="btn btn-danger" onclick="loadshow()">Play</button>
+        </form>
+      <br><br>
+      <div class="jumbotron bg-dark text-white">
+        <h1 class="text-center">Songs Played</h1>
+        <br />
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped table-dark">
+                <thead>
+                    <tr>
+                        <th scope="col">S.N.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">URL</th>
+                        <th scope="col">Artist</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (!data || data.length < 1 || data === null) { %>
+                    <tr>
+                        <th scope="row">1.</th>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                        <td>No Data</td>
+                    </tr>
+                    <% } else data.forEach(dt => {
+                    dt.data.reverse().forEach(d => {
+                    %>
+                    <tr>
+                        <th scope="row"><%= dt.data.indexOf(d) + 1 %>.</th>
+                        <th scope="row"><%= d.title %></th>
+                        <th scope="row"><a href="<%= d.data.video_url %>" target="_blank" id="yturl">Click Me</a></th>
+                        <th scope="row"><%= d.data.author.name %></th>
+                    </tr>
+                    <% 
+                  })
+                  }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+</div>
+
+<script>
+function loadshow() {
+  document.getElementById("button").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Converting';
+}
+</script>
+
+<%- include("./blocks/footer.ejs") %> 
